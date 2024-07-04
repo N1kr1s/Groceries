@@ -4,11 +4,18 @@ import { v4 as uuidv4 } from 'uuid'
 import Alert from './Alert'
 import React from 'react'
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem('list')
+  if (list) {
+    return (list = JSON.parse(localStorage.getItem('list')))
+  } else {
+    return []
+  }
+}
+
 const App = () => {
   const [name, setName] = useState('')
-  const [list, setList] = useState(() => {
-    return JSON.parse(localStorage.getItem('list'))
-  })
+  const [list, setList] = useState(getLocalStorage())
   const [isEditing, setIsEditing] = useState(false)
   const [editID, setEditID] = useState(null)
   const [alert, setAlert] = useState({
